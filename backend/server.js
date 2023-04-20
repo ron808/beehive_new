@@ -17,17 +17,17 @@ const openai = new OpenAIApi(configuration);
 var username = "valdrion96"
 var password = "Valdrion161102"
 var database = "Beehive"
-// const connectionString = `mongodb+srv://valdrion96:${password}@valdcluster.r4ab8vr.mongodb.net/${database}?retryWrites=true&w=majority`;
-// try{
-//     mongoose.connect(connectionString, { 
-//         useNewUrlParser: true,
-//         useUnifiedTopology: true,
-//         serverSelectionTimeoutMS: 30000 
-// })
-// }
-// catch(error){
-//     console.log(error)
-// }
+const connectionString = `mongodb+srv://valdrion96:${password}@valdcluster.r4ab8vr.mongodb.net/${database}?retryWrites=true&w=majority`;
+try{
+    mongoose.connect(connectionString, { 
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 30000 
+})
+}
+catch(error){
+    console.log(error)
+}
 
 // .then(() => {
 //   console.log('Connected to MongoDB');
@@ -38,7 +38,7 @@ var database = "Beehive"
 
 
 // LocalHost
-mongoose.connect('mongodb://localhost:27017/Beehive');
+// mongoose.connect('mongodb://localhost:27017/Beehive');
 
 
 
@@ -122,13 +122,20 @@ const Question = mongoose.model('Question',questionSchema);
 
 app.get("/signup",(req,res)=>{
 })
-app.post("/signup",(req,res)=>{
+app.post("/signup",async (req,res)=>{
     
 
     const {name, mail, password, tags} = req.body;
     // console.log(name, mail, password, tags);
     console.log(req.body);
 
+    var teach = await Teacher.findOne({mail:mail}).exec();
+
+
+if(teach){
+    res.json({message:"Message: User already exists!"});
+}
+else{    
     if(mail.includes("@sathyabama.ac.in")){
         const new_teach = new Teacher({
             name:name,
@@ -136,7 +143,8 @@ app.post("/signup",(req,res)=>{
             mail:mail,
             tags:tags
         })
-    new_teach.save();
+    new_teach.save().then(res.json({message:"Welcome teacher"}));
+
 
     }
     else{
@@ -146,9 +154,9 @@ app.post("/signup",(req,res)=>{
             mail:mail,
             tags:tags
         })
-    new_stud.save();
+    new_stud.save().then(res.json({message:"Welcome student"}));
 
-    }
+    }}
     
 })
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Loader } from "next/dynamic";
+import { useUserContext } from './UserContext';
+
 import { useState, useEffect, useLayoutEffect,useRef} from "react";
 
 
@@ -101,9 +102,7 @@ const Feed = ()=>{
                                 to={{
                                 pathname: '/answer',
                                 search: `?question=${question}`,
-                                }}>
-      Answer
-      </Link></button>
+                                }}>Answer</Link></button>
                         </form>
                     </div>}</pre></h2>
                 </div>

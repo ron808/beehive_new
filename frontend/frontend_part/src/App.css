@@ -1287,3 +1287,52 @@ background: rgba(255, 255, 255, 0.2);
 }
 
 
+.make_it_100{
+  width: 100vw;
+  height: 100vh;
+}
+.make_it_100 > h1{
+  font-weight: 100;
+  color: #221C43;
+  margin: 5rem;
+  font-size: 5rem;
+}
+.make_it_100 > p{
+  font-weight: 100;
+  color: green;
+  margin: 5rem;
+  font-size: 2rem;
+  position: relative;
+  left: 10rem;
+  bottom: 12rem;
+}
+.make_it_100 > img{
+  position: relative;
+  left: 50rem;
+  bottom: 12rem;
+}
+
+.make_it_100 > form{
+  position: relative;
+  left: 48rem;
+  bottom: 12rem;
+}
+
+
+.make_it_100 > form>button{
+  height: 2rem;
+  width: 8rem;
+  border-radius:10px;
+  transition: all 0.3s linear;
+}
+.make_it_100 > form>button>a{
+  color: #607626;
+}
+
+.make_it_100 > form>button:hover{
+  transform: scale(1.2);
+  background-color:#607626;
+}
+.make_it_100 > form>button:hover a{
+  color: white;
+}

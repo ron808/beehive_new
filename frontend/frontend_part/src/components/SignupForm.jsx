@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import Multiselect from 'multiselect-react-dropdown';
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop";
+import { useUserContext } from './UserContext';
+
+var temp;
 const select = [
     "Web development",
     "IOT",
@@ -24,21 +27,21 @@ const select = [
     "React",
     "Angular",
     "Vue",
-    "Swift", // Added item
-    "Kotlin", // Added item
-    "Ruby", // Added item
-    "PHP", // Added item
-    "ASP.NET", // Added item
-    "MongoDB", // Added item
-    "SQL", // Added item
-    "HTML5", // Added item
-    "CSS3", // Added item
-    "WordPress", // Added item
+    "Swift", 
+    "Kotlin", 
+    "Ruby", 
+    "PHP", 
+    "ASP.NET", 
+    "MongoDB", 
+    "SQL", 
+    "HTML5", 
+    "CSS3", 
+    "WordPress", 
   ];
 
 
 function SignupForm(){
-
+    const { isLoggedIn, setIsLoggedIn } = useUserContext();
     const [user,setUser] = useState([{tags:[]}]);
     let name, value;
 
@@ -71,7 +74,14 @@ function SignupForm(){
         }
         await fetch("/signup",data)
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data =>{
+            temp = JSON.stringify(data.message);
+            alert(temp);
+            if(temp.includes('teacher')){
+                console.log("matches")
+                setIsLoggedIn(true);
+            }
+        })
         .then(window.location.replace('/feed'))
     }
 

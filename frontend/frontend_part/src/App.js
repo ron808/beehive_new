@@ -12,6 +12,7 @@ import Ask from './components/Ask';
 import Teacherslist from './components/Teacherslist';
 import Feed from './components/Feed';
 import Answer from './components/Answer';
+import Success from './components/Success';
 import { Asktheguy } from './components/Asktheguy';
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
@@ -121,10 +122,10 @@ function App() {
       </Route>
 
 
-      <Route path="/failure" exact>
+      <Route path="/success" exact>
       <div>
         <Navbar />
-        <Feed />
+        <Success />
         <BottomNav />
       </div>
       </Route>
